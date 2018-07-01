@@ -6,6 +6,7 @@
   width: auto !important;
   font-size: 16px;
   margin-top: 8px;
+  margin-left: -45px;
 }
 
 #death-clock.twitter > .days-until-expiry {

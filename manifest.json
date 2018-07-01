@@ -1,0 +1,14 @@
+{
+  "name": "Social Media Death Clock",
+  "version": "1.0",
+  "description": "Remind yourself of your mortality while you waste away on social media",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*"],
+      "js": ["death-clock.js"],
+      "css": ["death-clock.css"]
+    }
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,13 @@
+#death-clock:before {
+  content: none;
+}
+
+#death-clock.twitter {
+  width: auto !important;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+#death-clock.twitter > .days-until-expiry {
+  margin-bottom: 6px;
+}

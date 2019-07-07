@@ -46,3 +46,22 @@
 #death-clock-youtube .death-clock {
   padding-top: 5px;
 }
+
+#death-clock-instagram {
+  display: flex;
+}
+
+#death-clock-instagram .social-media-death-clock {
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+#death-clock-instagram .social-media-death-clock .skull-emoji {
+  font-size: 40px;
+  margin-top: 10px;
+}
+
+#death-clock-instagram .social-media-death-clock .death-clock {
+  font-size: 18px;
+  font-weight: 600;
+}

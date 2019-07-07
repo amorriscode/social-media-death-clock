@@ -14,12 +14,16 @@ switch(true) {
   case window.location.href.includes('youtube'):
     socialMediaPlatform = 'youtube';
     break;
+  case window.location.href.includes('instagram'):
+    socialMediaPlatform = 'instagram';
+    break;
 }
 
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter"]',
   facebook: 'a[title="Go to Facebook home"]',
   youtube: '#logo',
+  instagram: 'a[href="/"]',
 };
 
 const startDeathClock = () => {
@@ -81,7 +85,7 @@ const startDeathClock = () => {
 
 let target;
 const findTarget = setInterval(() => {
-  target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform])
+  target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
   if (target) {
     startDeathClock();
     clearInterval(findTarget);

@@ -26,11 +26,23 @@
 #death-clock-facebook .social-media-death-clock {
   width: 140px;
   color: white;
-  padding: 0;
   margin-top: -6px;
 }
 
 #death-clock-facebook .social-media-death-clock .skull-emoji {
   font-size: 34px;
   margin-top: -2px;
+}
+
+#death-clock-youtube {
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+#death-clock-youtube .skull-emoji {
+  font-size: 38px;
+}
+
+#death-clock-youtube .death-clock {
+  padding-top: 5px;
 }

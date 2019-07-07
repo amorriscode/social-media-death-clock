@@ -11,11 +11,15 @@ switch(true) {
   case window.location.href.includes('facebook'):
     socialMediaPlatform = 'facebook';
     break;
+  case window.location.href.includes('youtube'):
+    socialMediaPlatform = 'youtube';
+    break;
 }
 
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter"]',
   facebook: 'a[title="Go to Facebook home"]',
+  youtube: '#logo',
 };
 
 const startDeathClock = () => {
@@ -71,8 +75,8 @@ const startDeathClock = () => {
         </div>
       `;
   }
-tickTock();
-  // window.setInterval(() => tickTock(), 1000);
+
+  window.setInterval(() => tickTock(), 1000);
 }
 
 let target;

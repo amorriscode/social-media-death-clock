@@ -8,65 +8,75 @@ switch(true) {
   case window.location.href.includes('twitter'):
     socialMediaPlatform = 'twitter';
     break;
-
-  default:
-    socialMediaPlatform = 'twitter';
-    break;
 }
 
 const socialMediaTargetClasses = {
-  twitter: '.Icon--bird',
+  twitter: 'a[aria-label="Twitter"]',
 };
 
-const target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
-
-target.id = 'death-clock';
-target.classList.add(socialMediaPlatform)
-
-const averageHumanExpiryAge = 80;
-const birthDate = new Date(1990, 4, 6);
-const expectedDeath = new Date(birthDate.getFullYear() + averageHumanExpiryAge, birthDate.getMonth(), birthDate.getDate());
-
-const addCommansToNumber = (number) => {
-  const reverseNumber = number
-    .toString()
-    .split('')
-    .reverse();
-
-  if (reverseNumber.length > 3) {
-    for (i = 3; i < reverseNumber.length; i += 3) {
-      reverseNumber[i] = `${reverseNumber[i]},`
+const startDeathClock = () => {
+  target.id = `death-clock-${socialMediaPlatform}`;
+  
+  const averageHumanExpiryAge = 80;
+  const birthDate = new Date(1990, 4, 6);
+  const expectedDeath = new Date(birthDate.getFullYear() + averageHumanExpiryAge, birthDate.getMonth(), birthDate.getDate());
+  
+  const addCommansToNumber = (number) => {
+    const reverseNumber = number
+      .toString()
+      .split('')
+      .reverse();
+  
+    if (reverseNumber.length > 3) {
+      for (i = 3; i < reverseNumber.length; i += 3) {
+        reverseNumber[i] = `${reverseNumber[i]},`
+      }
     }
+  
+    return reverseNumber.reverse().join('');
+  }
+  
+  const tickTock = () => {
+    const now = new Date();
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const nextHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1);
+    const nextMinute = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 1);
+    
+    const timeUntilTomorrow = Math.abs(now.getTime() - tomorrow.getTime());
+    const timeUntilNextHour = Math.abs(now.getTime() - nextHour.getTime());
+    const timeUntilNextMinute = Math.abs(now.getTime() - nextMinute.getTime());
+    const timeUntilExpiry = Math.abs(expectedDeath.getTime() - now.getTime());
+  
+    const daysUntilExpiry = Math.ceil(timeUntilExpiry / DAYS_IN_MILLISECONDS);
+    const hoursUntilTomorrow = Math.ceil(timeUntilTomorrow / HOURS_IN_MILLISECONDS);
+    const minutesUntilNextHour = Math.ceil(timeUntilNextHour / MINUTES_IN_MILLISECONDS);
+    const secondsUntilNextMinute = Math.ceil(timeUntilNextMinute / SECONDS_IN_MILLISECONDS) - 1;
+  
+    const daysToDisplay = addCommansToNumber(daysUntilExpiry);
+    const secondsToDisplay = (secondsUntilNextMinute.toString().length === 1)
+      ? `0${secondsUntilNextMinute}`
+      : secondsUntilNextMinute; 
+  
+    target.innerHTML = `
+        <div id="social-media-death-clock">
+          <div class="skull-emoji">☠️</div>
+          <div class="death-clock">
+            <div class="days-until-expiry">${daysToDisplay} days</div>
+            <div class="time-until-expiry">${hoursUntilTomorrow}:${minutesUntilNextHour}:${secondsToDisplay}</div>
+          </div>
+        </div>
+      `;
   }
 
-  return reverseNumber.reverse().join('');
+  window.setInterval(() => tickTock(), 1000);
 }
 
-const tickTock = () => {
-  const now = new Date();
-  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-  const nextHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1);
-  const nextMinute = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 1);
-  
-  const timeUntilTomorrow = Math.abs(now.getTime() - tomorrow.getTime());
-  const timeUntilNextHour = Math.abs(now.getTime() - nextHour.getTime());
-  const timeUntilNextMinute = Math.abs(now.getTime() - nextMinute.getTime());
-  const timeUntilExpiry = Math.abs(expectedDeath.getTime() - now.getTime());
+let target;
+const findTarget = setInterval(() => {
+  target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform])
+  if (target) {
+    startDeathClock();
+    clearInterval(findTarget);
+  }
+}, 1000);
 
-  const daysUntilExpiry = Math.ceil(timeUntilExpiry / DAYS_IN_MILLISECONDS);
-  const hoursUntilTomorrow = Math.ceil(timeUntilTomorrow / HOURS_IN_MILLISECONDS);
-  const minutesUntilNextHour = Math.ceil(timeUntilNextHour / MINUTES_IN_MILLISECONDS);
-  const secondsUntilNextMinute = Math.ceil(timeUntilNextMinute / SECONDS_IN_MILLISECONDS) - 1;
-
-  const daysToDisplay = addCommansToNumber(daysUntilExpiry);
-  const secondsToDisplay = (secondsUntilNextMinute.toString().length === 1)
-    ? `0${secondsUntilNextMinute}`
-    : secondsUntilNextMinute; 
-
-  target.innerHTML = `
-      <div class="days-until-expiry">${daysToDisplay} days</div>
-      <div class="time-until-expiry">${hoursUntilTomorrow}:${minutesUntilNextHour}:${secondsToDisplay}</div>
-    `;
-}
-
-window.setInterval(() => tickTock(), 1000);

@@ -1,14 +1,21 @@
-#death-clock:before {
-  content: none;
+#social-media-death-clock {
+  display: flex;
+  justify-content: center;
 }
 
-#death-clock.twitter {
-  width: auto !important;
+#social-media-death-clock .skull-emoji {
+  font-size: 40px;
+  margin-right: 10px;
+}
+
+#social-media-death-clock .death-clock {
+  padding-top: 5px;
+}
+
+#death-clock-twitter {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-weight: 900;
   font-size: 16px;
   margin-top: 8px;
-  margin-left: -45px;
-}
-
-#death-clock.twitter > .days-until-expiry {
-  margin-bottom: 6px;
+  color: rgba(29, 161, 242, 1);
 }

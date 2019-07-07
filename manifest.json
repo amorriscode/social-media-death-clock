@@ -5,7 +5,10 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*"],
+      "matches": [
+        "https://twitter.com/*",
+        "https://www.facebook.com/*"
+      ],
       "js": ["death-clock.js"],
       "css": ["death-clock.css"]
     }

@@ -8,10 +8,14 @@ switch(true) {
   case window.location.href.includes('twitter'):
     socialMediaPlatform = 'twitter';
     break;
+  case window.location.href.includes('facebook'):
+    socialMediaPlatform = 'facebook';
+    break;
 }
 
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter"]',
+  facebook: 'a[title="Go to Facebook home"]',
 };
 
 const startDeathClock = () => {
@@ -58,7 +62,7 @@ const startDeathClock = () => {
       : secondsUntilNextMinute; 
   
     target.innerHTML = `
-        <div id="social-media-death-clock">
+        <div class="social-media-death-clock">
           <div class="skull-emoji">☠️</div>
           <div class="death-clock">
             <div class="days-until-expiry">${daysToDisplay} days</div>
@@ -67,8 +71,8 @@ const startDeathClock = () => {
         </div>
       `;
   }
-
-  window.setInterval(() => tickTock(), 1000);
+tickTock();
+  // window.setInterval(() => tickTock(), 1000);
 }
 
 let target;

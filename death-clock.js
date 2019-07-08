@@ -28,8 +28,8 @@ switch(true) {
 }
 
 const socialMediaTargetClasses = {
-  twitter: 'a[aria-label="Twitter"]',
-  facebook: 'a[title="Go to Facebook home"]',
+  twitter: 'a[aria-label="Twitter" i]',
+  facebook: 'a[title="go to facebook home" i]',
   youtube: '#logo',
   instagram: 'a[href="/"]',
   none: '.insert-death-clock'

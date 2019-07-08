@@ -2,15 +2,11 @@ const SECONDS_IN_MILLISECONDS = 1000;
 const MINUTES_IN_MILLISECONDS = SECONDS_IN_MILLISECONDS * 60;
 const HOURS_IN_MILLISECONDS = MINUTES_IN_MILLISECONDS * 60;
 const DAYS_IN_MILLISECONDS = HOURS_IN_MILLISECONDS * 24;
+const AVERAGE_HUMAN_EXPIRY_AGE = 80;
 
 let birthYear;
 let birthMonth;
 let birthDay;
-chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {
-  if (birthdate) {
-    [birthYear, birthMonth, birthDay] = birthdate.split('-');
-  }
-});
 
 let socialMediaPlatform;
 switch(true) {
@@ -41,12 +37,7 @@ const socialMediaTargetClasses = {
 
 const startDeathClock = () => {
   target.id = `death-clock-${socialMediaPlatform}`;
-  
-  const averageHumanExpiryAge = 80;
-  // JavaScript months start at 0
-  const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
-  const expectedDeath = new Date(birthDate.getFullYear() + averageHumanExpiryAge, birthDate.getMonth(), birthDate.getDate());
-  
+
   const addCommansToNumber = (number) => {
     const reverseNumber = number
       .toString()
@@ -63,9 +54,18 @@ const startDeathClock = () => {
   }
   
   const tickTock = () => {
-    let deathClock = `
-      <div>SET YOUR BIRTHDATE!</div>
-    `;
+    // Check for birthdate every time incase it has been updated
+    chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {
+      if (birthdate) {
+        [birthYear, birthMonth, birthDay] = birthdate.split('-');
+      }
+    });
+
+    // JavaScript months start at 0
+    const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+    const expectedDeath = new Date(birthDate.getFullYear() + AVERAGE_HUMAN_EXPIRY_AGE, birthDate.getMonth(), birthDate.getDate());
+
+    let deathClock = (socialMediaPlatform !== 'none') ? '<div>SET YOUR BIRTHDATE!</div>' : '';
 
     if (birthYear && birthDay && birthMonth) {
       const now = new Date();
@@ -96,14 +96,12 @@ const startDeathClock = () => {
 
     // Chrome Extension popup doesn't like emojis
     const skull = (socialMediaPlatform !== 'none') ? '☠️' : '';
-    const makeThemCount = (socialMediaPlatform === 'none') ? '<br/><div>Make every day count!</div>' : '';
 
     target.innerHTML = `
         <div class="social-media-death-clock">
           <div class="skull-emoji">${skull}</div>
           <div class="death-clock">
             ${deathClock}
-            ${makeThemCount}
           </div>
         </div>
       `;
@@ -119,5 +117,5 @@ const findTarget = setInterval(() => {
     startDeathClock();
     clearInterval(findTarget);
   }
-}, 1000);
+}, 50);
 

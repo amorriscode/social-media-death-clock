@@ -79,8 +79,9 @@ const startDeathClock = () => {
       const timeUntilExpiry = Math.abs(expectedDeath.getTime() - now.getTime());
     
       const daysUntilExpiry = Math.ceil(timeUntilExpiry / DAYS_IN_MILLISECONDS);
-      const hoursUntilTomorrow = Math.ceil(timeUntilTomorrow / HOURS_IN_MILLISECONDS);
-      const minutesUntilNextHour = Math.ceil(timeUntilNextHour / MINUTES_IN_MILLISECONDS);
+      let hoursUntilTomorrow = Math.ceil(timeUntilTomorrow / HOURS_IN_MILLISECONDS);
+      hoursUntilTomorrow = (hoursUntilTomorrow.toString().length === 1) ? `0${hoursUntilTomorrow}` : hoursUntilTomorrow;
+      const minutesUntilNextHour = Math.ceil(timeUntilNextHour / MINUTES_IN_MILLISECONDS - 1);
       const secondsUntilNextMinute = Math.ceil(timeUntilNextMinute / SECONDS_IN_MILLISECONDS) - 1;
     
       const daysToDisplay = addCommansToNumber(daysUntilExpiry);

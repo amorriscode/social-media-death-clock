@@ -10,7 +10,8 @@
         "https://www.facebook.com/*",
         "https://www.youtube.com/*",
         "https://www.instagram.com/*",
-        "https://www.reddit.com/*"
+        "https://www.reddit.com/*",
+        "https://www.linkedin.com/*"
       ],
       "js": ["death-clock.js"],
       "css": ["death-clock.css"]

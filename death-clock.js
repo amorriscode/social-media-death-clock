@@ -25,6 +25,9 @@ switch(true) {
   case window.location.href.includes('reddit'):
     socialMediaPlatform = 'reddit';
     break;
+  case window.location.href.includes('linkedin'):
+    socialMediaPlatform = 'linkedin';
+    break;
   default:
     socialMediaPlatform = 'none';
     break;
@@ -36,6 +39,7 @@ const socialMediaTargetClasses = {
   youtube: '#logo',
   instagram: 'a[href="/"]',
   reddit: 'a[aria-label="Home" i]',
+  linkedin: 'a[href="/feed/"]',
   none: '.insert-death-clock'
 };
 
@@ -123,7 +127,7 @@ const findTarget = setInterval(() => {
 
     // Run the clock once then start the interval
     tickTock();
-    window.setInterval(() => tickTock(), 1000);
+    // window.setInterval(() => tickTock(), 1000);
 
     clearInterval(findTarget);
   }

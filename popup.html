@@ -2,87 +2,55 @@
 <html>
   <head>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-
-    <style>
-      body {
-        font: 18px "Roboto", sans-serif; 
-        background: #06161F;
-        color: white;
-      }
-      .container {
-        width: 500px;
-        padding: 40px;
-      }
-      blockquote {
-        display: flex;
-        flex-direction: column;
-        font-family: 'Permanent Marker', cursive;
-      }
-      blockquote .quote {
-        font-size: 24px;
-        text-align: justify;
-      }
-      blockquote .quotee {
-        width: 100%;
-        text-align: right;
-      }
-      .date-picker {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: 40px;
-      }
-      input {
-        font: 18px "Roboto", sans-serif;
-        border-radius: 5px;
-        border: none;
-        padding: 5px;
-      }
-      #death-clock-none {
-        margin-bottom: 20px;
-        font-size: 40px;
-        font-weight: 800;
-        color: #00DFFC;
-      }
-      #death-clock-none .death-clock {
-        text-align: center;
-      }
-      .footer {
-        text-align: center;
-      }
-      .footer a {
-        font-size: 10px;
-        text-decoration: none;
-        color: #00DFFC;
-      }
-      .footer a:hover {
-        color: #005F6B;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="popup.css" />
   </head>
 
   <body>
-    <div class="container">
+    <div class="darkness"></div>
+
+    <div class="skull-container">
+        <img src="images/skull-and-crossbones.png" width="50" height="50">
+    </div>
+
+    <div class="container">        
+        <div class="clock">
+          <div class="insert-death-clock"></div>
+          <div>Make them count!</div>
+
+          <button id="settings">Settings</button>
+        </div>
+
+        <div class="settings">
+          <div class="date-picker">
+            <label for="birthdate">When were you born?</label>
+            <br />
+            <input type="date" name="birthdate" id="birthdate">
+          </div>
+
+          <button id="back">Back</button>
+
+          <br/><br/>
+
+          <div class="footer">
+            <div class="version">
+              <a href="https://github.com/amorriscode/social-media-death-clock/releases/latest" target="_blank">
+                v1.1.0
+              </a>
+            </div>
+
+            <div class="credit">
+              <a href="https://anthonymorris.dev" target="_blank">
+                made with <3 in Vancouver
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <blockquote>
         <span class="quote">"You could leave life right now. Let that determine what you do and say and think."</span>
-        <br />
         <span class="quotee">Marcus Aurelius</span>
       </blockquote>
-  
-      <div class="date-picker">
-        <label for="birthdate">When were you born?</label>
-        <br />
-        <input type="date" name="birthdate" id="birthdate">
-      </div>
-
-      <div class="insert-death-clock"></div>
-
-      <div class="footer">
-        Make them count!
-        <br/><br/>
-        <a href="https://anthonymorris.dev" target="_blank">made with <3 in Vancouver</a>
-      </div>
-    </div>
 
     <script src="popup.js"></script>
     <script src="death-clock.js"></script>

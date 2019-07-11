@@ -4,34 +4,21 @@ const HOURS_IN_MILLISECONDS = MINUTES_IN_MILLISECONDS * 60;
 const DAYS_IN_MILLISECONDS = HOURS_IN_MILLISECONDS * 24;
 const AVERAGE_HUMAN_EXPIRY_AGE = 80;
 
-let birthYear;
-let birthMonth;
-let birthDay;
+const supportedPlatforms = [
+  'twitter',
+  'facebook',
+  'youtube',
+  'instagram',
+  'reddit',
+  'linkedin',
+];
 
-let socialMediaPlatform;
-switch(true) {
-  case window.location.href.includes('twitter'):
-    socialMediaPlatform = 'twitter';
-    break;
-  case window.location.href.includes('facebook'):
-    socialMediaPlatform = 'facebook';
-    break;
-  case window.location.href.includes('youtube'):
-    socialMediaPlatform = 'youtube';
-    break;
-  case window.location.href.includes('instagram'):
-    socialMediaPlatform = 'instagram';
-    break;
-  case window.location.href.includes('reddit'):
-    socialMediaPlatform = 'reddit';
-    break;
-  case window.location.href.includes('linkedin'):
-    socialMediaPlatform = 'linkedin';
-    break;
-  default:
-    socialMediaPlatform = 'none';
-    break;
-}
+let socialMediaPlatform = 'none';
+supportedPlatforms.forEach(platform => {
+  socialMediaPlatform = window.location.href.includes(platform)
+    ? platform
+    : socialMediaPlatform;
+});
 
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter" i]',
@@ -42,6 +29,10 @@ const socialMediaTargetClasses = {
   linkedin: 'a[href="/feed/"]',
   none: '.insert-death-clock'
 };
+
+let birthYear;
+let birthMonth;
+let birthDay;
 
 const getBirthdate = () => {
   chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {
@@ -127,7 +118,7 @@ const findTarget = setInterval(() => {
 
     // Run the clock once then start the interval
     tickTock();
-    // window.setInterval(() => tickTock(), 1000);
+    window.setInterval(() => tickTock(), 1000);
 
     clearInterval(findTarget);
   }

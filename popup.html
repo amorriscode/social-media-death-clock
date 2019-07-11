@@ -5,22 +5,60 @@
 
     <style>
       body {
-        font: 18px "Roboto", sans-serif; 
-        background: #06161F;
-        color: white;
+        font: 16px "Roboto", sans-serif; 
+        color: rgba(52,56,56,1);
+        margin: 0;
+        width: 500px;
+      }
+      .darkness {
+        background: #0C2430;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 50vh;
+      }
+      .skull-container {
+        position: relative;
+        top: 65px;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
       }
       .container {
-        width: 500px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px 0 rgba(6,57,66,.12);
+        margin: 40px;
         padding: 40px;
+      }
+      .container button {
+        margin-top: 20px;
+        font: 14px "Roboto", sans-serif; 
+        font-weight: bold;
+        padding: 10px;
+        border: 1px solid #e9ebeb;
+        border-bottom: 1px solid #e1e2e4;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px 0 rgba(6,57,66,.12);
+      }
+      .container button:hover {
+        cursor: pointer;
+        background: rgba(6,57,66,.05);
+        transition: background 0.2s;
       }
       blockquote {
         display: flex;
         flex-direction: column;
-        font-family: 'Permanent Marker', cursive;
+        margin: 40px;
+        color: rgba(52,56,56,0.4);
+        font-size: 12px;
       }
       blockquote .quote {
-        font-size: 24px;
         text-align: justify;
+        font-style: italic;
       }
       blockquote .quotee {
         width: 100%;
@@ -30,59 +68,83 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        padding: 40px;
+      }
+      label {
+        font-weight: bold;
       }
       input {
-        font: 18px "Roboto", sans-serif;
+        font: 16px "Roboto", sans-serif;
         border-radius: 5px;
-        border: none;
+        border: 1px solid #0C2430;
         padding: 5px;
       }
       #death-clock-none {
-        margin-bottom: 20px;
         font-size: 40px;
         font-weight: 800;
-        color: #00DFFC;
       }
       #death-clock-none .death-clock {
-        text-align: center;
+        margin-bottom: 15px;
       }
       .footer {
         text-align: center;
+        font-size: 10px;
       }
       .footer a {
-        font-size: 10px;
         text-decoration: none;
-        color: #00DFFC;
+        color: #005F6B;
       }
       .footer a:hover {
-        color: #005F6B;
+        color: #063942;
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
+    <div class="darkness"></div>
+
+    <div class="skull-container">
+        <img src="images/skull-and-crossbones.png" width="50" height="50">
+    </div>
+
+    <div class="container">        
+        <div class="clock">
+          <div class="insert-death-clock"></div>
+          <div>Make them count!</div>
+
+          <button id="settings">Settings</button>
+        </div>
+
+        <div class="settings">
+          <div class="date-picker">
+            <label for="birthdate">When were you born?</label>
+            <br />
+            <input type="date" name="birthdate" id="birthdate">
+          </div>
+
+          <button id="back">Back</button>
+
+          <br/><br/>
+
+          <div class="footer">
+            <div class="version">
+              <a href="https://github.com/amorriscode/social-media-death-clock/releases/latest" target="_blank">
+                v1.1.0
+              </a>
+            </div>
+
+            <div class="credit">
+              <a href="https://anthonymorris.dev" target="_blank">
+                made with <3 in Vancouver
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <blockquote>
         <span class="quote">"You could leave life right now. Let that determine what you do and say and think."</span>
-        <br />
         <span class="quotee">Marcus Aurelius</span>
       </blockquote>
-  
-      <div class="date-picker">
-        <label for="birthdate">When were you born?</label>
-        <br />
-        <input type="date" name="birthdate" id="birthdate">
-      </div>
-
-      <div class="insert-death-clock"></div>
-
-      <div class="footer">
-        Make them count!
-        <br/><br/>
-        <a href="https://anthonymorris.dev" target="_blank">made with <3 in Vancouver</a>
-      </div>
-    </div>
 
     <script src="popup.js"></script>
     <script src="death-clock.js"></script>

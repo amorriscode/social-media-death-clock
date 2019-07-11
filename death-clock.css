@@ -74,3 +74,14 @@
 #death-clock-linkedin .skull-emoji {
   font-size: 35px;
 }
+
+#death-clock-vk .skull-emoji {
+  font-size: 32px;
+  margin-top: 4px;
+}
+
+#death-clock-vk .death-clock {
+  margin-top: 7px;
+  font-weight: bold;
+  color: white;
+}

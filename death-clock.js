@@ -11,6 +11,7 @@ const supportedPlatforms = [
   'instagram',
   'reddit',
   'linkedin',
+  'vk',
 ];
 
 let socialMediaPlatform = 'none';
@@ -27,6 +28,7 @@ const socialMediaTargetClasses = {
   instagram: 'a[href="/"]',
   reddit: 'a[aria-label="Home" i]',
   linkedin: 'a[href="/feed/"]',
+  vk: 'a[aria-label="Home" i]',
   none: '.insert-death-clock'
 };
 

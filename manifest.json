@@ -11,7 +11,8 @@
         "https://www.youtube.com/*",
         "https://www.instagram.com/*",
         "https://www.reddit.com/*",
-        "https://www.linkedin.com/*"
+        "https://www.linkedin.com/*",
+        "https://vk.com/*"
       ],
       "js": ["death-clock.js"],
       "css": ["death-clock.css"]

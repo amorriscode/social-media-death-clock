@@ -65,3 +65,8 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+#death-clock-reddit .skull-emoji {
+  font-size: 28px;
+  margin-top: 4px;
+}

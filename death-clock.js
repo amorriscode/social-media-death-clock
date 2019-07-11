@@ -22,6 +22,9 @@ switch(true) {
   case window.location.href.includes('instagram'):
     socialMediaPlatform = 'instagram';
     break;
+  case window.location.href.includes('reddit'):
+    socialMediaPlatform = 'reddit';
+    break;
   default:
     socialMediaPlatform = 'none';
     break;
@@ -32,6 +35,7 @@ const socialMediaTargetClasses = {
   facebook: 'a[title="go to facebook home" i]',
   youtube: '#logo',
   instagram: 'a[href="/"]',
+  reddit: 'a[aria-label="Home" i]',
   none: '.insert-death-clock'
 };
 
@@ -109,21 +113,18 @@ const tickTock = () => {
     `;
 }
 
-const startDeathClock = () => {
-  target.id = `death-clock-${socialMediaPlatform}`;
-  
-  // Run the clock once then start the interval
-  tickTock();
-  window.setInterval(() => tickTock(), 1000);
-}
-
 getBirthdate();
 
 let target;
 const findTarget = setInterval(() => {
   target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
   if (target) {
-    startDeathClock();
+    target.id = `death-clock-${socialMediaPlatform}`;
+
+    // Run the clock once then start the interval
+    tickTock();
+    window.setInterval(() => tickTock(), 1000);
+
     clearInterval(findTarget);
   }
 }, 50);

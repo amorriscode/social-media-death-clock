@@ -19,3 +19,5 @@ Inspired by [twitter-timer](https://github.com/siddharthkp/twitter-timer) and [t
 ## Contributors
 
 Am I missing a social media site you'd love to see? Don't be afraid to [create an issue](https://github.com/amorriscode/social-media-death-clock/issues/new) or [open a pull request](https://github.com/amorriscode/social-media-death-clock/compare). All contributions are welcome!
+
+If you need help getting started, take a look at the [Contributor's Guide](CONTRIBUTING.md).

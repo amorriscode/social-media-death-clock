@@ -1,3 +1,8 @@
+.dark {
+  color: white;
+}
+
+
 .social-media-death-clock {
   display: flex;
   justify-content: center;
@@ -5,6 +10,7 @@
 
 .social-media-death-clock .skull-emoji {
   margin-right: 10px;
+  text-decoration: none;
 }
 
 #death-clock-twitter {

@@ -47,9 +47,8 @@ const quotes = [
 const quoteID = Math.floor(Math.random() * quotes.length);
 
 //assigns that quote value
-document.querySelector('#quote').innerHTML =quotes[quoteID].quote;
+document.querySelector('#quote').innerHTML = quotes[quoteID].quote;
 
 document.querySelector('#quotee').innerHTML = quotes[quoteID].author;
-
 
 

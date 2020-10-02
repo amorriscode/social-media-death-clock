@@ -105,7 +105,7 @@ const tickTock = () => {
   const skull = (socialMediaPlatform !== 'none') ? '☠️' : '';
   target.innerHTML = `
       <div class="social-media-death-clock">
-        <a href="${siteurl}" class="skull-emoji">${skull}</a>
+        <a href="${siteUrl}" class="skull-emoji">${skull}</a>
         <div class="death-clock">
           ${deathClock}
         </div>

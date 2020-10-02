@@ -1,3 +1,8 @@
+.dark {
+  color:white;
+}
+
+
 .social-media-death-clock {
   display: flex;
   justify-content: center;
@@ -16,8 +21,6 @@
   color: rgba(29, 161, 242, 1);
 }
 
-
-
 #death-clock-twitter .social-media-death-clock .skull-emoji {
   font-size: 40px;
 }
@@ -35,12 +38,6 @@
 #death-clock-facebook .social-media-death-clock .skull-emoji {
   font-size: 34px;
   margin-top: -2px;
-}
-
-#death-clock-youtube-dark {
-  color:white;
-  font-size: 16px;
-  margin-top: 6px;
 }
 
 #death-clock-youtube {

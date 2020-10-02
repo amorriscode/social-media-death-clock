@@ -123,12 +123,11 @@ const youtubeDarkMode = socialMediaPlatform == 'youtube' && document.documentEle
 const findTarget = setInterval(() => {
   target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
   if (target) {
-    
+    target.id = `death-clock-${socialMediaPlatform}`;
+      
     //Support for youtube darkmode. Changes font. Leaves open to creating more darkmodes in future.
     if(youtubeDarkMode){
-        target.id = `death-clock-${socialMediaPlatform}-dark`;
-    }else{
-        target.id = `death-clock-${socialMediaPlatform}`;
+        target.classList.add("dark");
     }
     
     

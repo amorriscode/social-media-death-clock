@@ -36,6 +36,9 @@ let birthYear;
 let birthMonth;
 let birthDay;
 
+//doing this to only set it once for later on. Otherwise it fetch it every tick which seems wrong to me - Jet
+const siteurl = window.location;
+
 const getBirthdate = () => {
   chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {
     if (birthdate) {
@@ -98,11 +101,11 @@ const tickTock = () => {
   }
 
   // Chrome Extension popup doesn't like emojis
+  // Making skull a link to the homepage of the site it is on
   const skull = (socialMediaPlatform !== 'none') ? '☠️' : '';
-
   target.innerHTML = `
       <div class="social-media-death-clock">
-        <div class="skull-emoji">${skull}</div>
+        <a href="` + siteurl + `" class="skull-emoji">${skull}</a>
         <div class="death-clock">
           ${deathClock}
         </div>
@@ -113,11 +116,22 @@ const tickTock = () => {
 getBirthdate();
 
 let target;
+
+//declaring here to not have it tick.
+const youtubeDarkMode = socialMediaPlatform == 'youtube' && document.documentElement.getAttribute("dark");
+
 const findTarget = setInterval(() => {
   target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
   if (target) {
-    target.id = `death-clock-${socialMediaPlatform}`;
-
+    
+    //Support for youtube darkmode. Changes font. Leaves open to creating more darkmodes in future.
+    if(youtubeDarkMode){
+        target.id = `death-clock-${socialMediaPlatform}-dark`;
+    }else{
+        target.id = `death-clock-${socialMediaPlatform}`;
+    }
+    
+    
     // Run the clock once then start the interval
     tickTock();
     window.setInterval(() => tickTock(), 1000);

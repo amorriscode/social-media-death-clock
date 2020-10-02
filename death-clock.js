@@ -37,7 +37,7 @@ let birthMonth;
 let birthDay;
 
 //doing this to only set it once for later on. Otherwise it fetch it every tick which seems wrong to me - Jet
-const siteurl = window.location;
+const siteUrl = window.location;
 
 const getBirthdate = () => {
   chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {

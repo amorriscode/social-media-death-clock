@@ -22,7 +22,6 @@ supportedPlatforms.forEach(platform => {
     : socialMediaPlatform;
 });
 
-
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter" i]',
   facebook: 'a[title="go to facebook home" i]',

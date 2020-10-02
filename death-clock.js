@@ -12,6 +12,7 @@ const supportedPlatforms = [
   'reddit',
   'linkedin',
   'vk',
+  'd2l',
 ];
 
 let socialMediaPlatform = 'none';
@@ -21,6 +22,7 @@ supportedPlatforms.forEach(platform => {
     : socialMediaPlatform;
 });
 
+
 const socialMediaTargetClasses = {
   twitter: 'a[aria-label="Twitter" i]',
   facebook: 'a[title="go to facebook home" i]',
@@ -29,6 +31,7 @@ const socialMediaTargetClasses = {
   reddit: 'a[aria-label="Home" i]',
   linkedin: 'a[href="/feed/"]',
   vk: 'a[aria-label="Home" i]',
+  d2l : '.d2l-navigation-link',
   none: '.insert-death-clock'
 };
 
@@ -37,7 +40,7 @@ let birthMonth;
 let birthDay;
 
 //doing this to only set it once for later on. Otherwise it fetch it every tick which seems wrong to me - Jet
-const siteUrl = window.location;
+const siteUrl = window.location.hostname;
 
 const getBirthdate = () => {
   chrome.storage.sync.get(['birthdate'], ({ birthdate }) => {
@@ -105,7 +108,7 @@ const tickTock = () => {
   const skull = (socialMediaPlatform !== 'none') ? '☠️' : '';
   target.innerHTML = `
       <div class="social-media-death-clock">
-        <a href="${siteUrl}" class="skull-emoji">${skull}</a>
+        <a href="https://${siteUrl}" class="skull-emoji">${skull}</a>
         <div class="death-clock">
           ${deathClock}
         </div>

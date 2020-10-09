@@ -123,7 +123,7 @@ const youtubeDarkMode = socialMediaPlatform == 'youtube' && (document.documentEl
 
 const findTarget = setInterval(() => {
 
-  //I am declaring this here because it was causing bugs on quick reload that crashed the plugin otherwise.
+  // declared here to avoid plugin crashing on quick reload
   const youtubeTheaterMode = socialMediaPlatform == 'youtube' && document.getElementById("page-manager").innerHTML.includes("theater-requested");
   
   target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);

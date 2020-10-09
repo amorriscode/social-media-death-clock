@@ -132,7 +132,7 @@ const findTarget = setInterval(() => {
     target.id = `death-clock-${socialMediaPlatform}`;
       
     //Support for youtube darkmode. Changes font. Leaves open to creating more darkmodes in future.
-    if(youtubeDarkMode || youtubeTheaterMode){
+    if (youtubeDarkMode || youtubeTheaterMode){
         target.classList.add("dark");
     }
     

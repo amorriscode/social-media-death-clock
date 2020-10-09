@@ -117,16 +117,22 @@ getBirthdate();
 
 let target;
 
-//declaring here to not have it tick.
-const youtubeDarkMode = socialMediaPlatform == 'youtube' && document.documentElement.getAttribute("dark");
+
+const youtubeDarkMode = socialMediaPlatform == 'youtube' && (document.documentElement.getAttribute("dark"));
+
 
 const findTarget = setInterval(() => {
+
+  //I am declaring this here because it was causing bugs on quick reload that crashed the plugin otherwise.
+  const youtubeTheaterMode = socialMediaPlatform == 'youtube' && document.getElementById("page-manager").innerHTML.includes("theater-requested");
+  
   target = document.querySelector(socialMediaTargetClasses[socialMediaPlatform]);
+  
   if (target) {
     target.id = `death-clock-${socialMediaPlatform}`;
       
     //Support for youtube darkmode. Changes font. Leaves open to creating more darkmodes in future.
-    if(youtubeDarkMode){
+    if(youtubeDarkMode || youtubeTheaterMode){
         target.classList.add("dark");
     }
     

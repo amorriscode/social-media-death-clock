@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import "./styles.css"
+
 function IndexPopup() {
   const [data, setData] = useState("")
 
@@ -10,7 +12,7 @@ function IndexPopup() {
         flexDirection: "column",
         padding: 16
       }}>
-      <h1>
+      <h1 className="font-bold">
         Welcome to your <a href="https://www.plasmo.com">Plasmo</a> Extension!
       </h1>
       <input onChange={(e) => setData(e.target.value)} value={data} />

@@ -1,8 +1,8 @@
+import css from "data-text:~styles.css"
 import type { PlasmoContentScript } from "plasmo"
+import { useState } from "react"
 
-import { useStorage } from "@plasmohq/storage"
-
-import "./styles.css"
+import { Storage, useStorage } from "@plasmohq/storage"
 
 export const config: PlasmoContentScript = {
   matches: [
@@ -17,27 +17,45 @@ export const config: PlasmoContentScript = {
   all_frames: true
 }
 
-export const getRootContainer = () => {
-  // Create a div for the banner
-  const styles =
-    "z-index: 99999999999; background: white; position: fixed; width: 100%;"
-  document.body.insertAdjacentHTML(
-    "afterbegin",
-    `<div id="smdc-banner" style="${styles}"></div>`
-  )
-
-  return document.querySelector("#smdc-banner")
+export const getStyle = () => {
+  const style = document.createElement("style")
+  style.textContent = css
+  return style
 }
 
 const DeathClockBanner = () => {
-  const [birthDate] = useStorage("birthdate")
+  const [showBanner, setShowBanner] = useState(true)
+  const [birthdate] = useStorage("birthdate")
+  console.log("AM: ", birthdate)
+
+  chrome.storage.sync.get(["birthdate"], ({ birthdate }) => {
+    if (birthdate) {
+      console.log("AM: ", birthdate)
+    }
+  })
 
   return (
-    <div className="text-center w-screen p-4 text-base">
-      {!birthDate ? (
-        <div>Set your birth date to use Social Media Death Clock</div>
-      ) : (
-        <div></div>
+    <div className="fixed bottom-0 text-center m-4 font-sans flex items-center">
+      {showBanner && (
+        <>
+          <div className="p-8 bg-yellow-300 text-black font-bold border-2 border-black uppercase">
+            {!birthdate ? <div>Set your birthdate</div> : <div></div>}
+          </div>
+
+          <div
+            className="text-sm font-bold text-yellow-300 bg-black p-2 -ml-4 hover:cursor-pointer"
+            onClick={() => setShowBanner(false)}>
+            &lt;
+          </div>
+        </>
+      )}
+
+      {!showBanner && (
+        <div
+          className="text-lg font-bold bg-yellow-300 p-2 border-2 border-black hover:cursor-pointer"
+          onClick={() => setShowBanner(true)}>
+          &gt;
+        </div>
       )}
     </div>
   )

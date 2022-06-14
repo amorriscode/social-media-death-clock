@@ -1,62 +1,21 @@
-import {
-  add,
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
-  differenceInYears,
-  startOfTomorrow,
-  startOfYear
-} from "date-fns"
-import { startOfHour, startOfMinute } from "date-fns/esm"
-import { useEffect, useState } from "react"
-
-import { useStorage } from "@plasmohq/storage"
+import { useDeathClock } from "~useDeathClock"
+import { AVERAGE_LIFE_EXPETANCY } from "~utils"
 
 import "./styles.css"
 
-const AVERAGE_LIFE_EXPETANCY = 72
+const padCalendarNum = (number) => number.toString().padStart(2, "0")
 
-const getExpiryDate = (birthdate) => {
-  return add(new Date(birthdate), { years: AVERAGE_LIFE_EXPETANCY })
-}
-
-type TimeLeft = {
-  secondsLeft: number
-  minutesLeft: number
-  hoursLeft: number
-  daysLeft: number
-  yearsLeft: number
-}
-
-const getDistanceUntilExpiry = (birthdate): TimeLeft => {
+const getDefaultDate = () => {
   const now = new Date()
-  const tomorrow = startOfTomorrow()
-  const nextYear = startOfYear(add(now, { years: 1 }))
-  const nextHour = startOfHour(add(now, { hours: 1 }))
-  const nextMinute = startOfMinute(add(now, { minutes: 1 }))
-  const expiryDate = getExpiryDate(birthdate)
+  const year = now.getFullYear()
+  const month = padCalendarNum(now.getMonth())
+  const day = padCalendarNum(now.getDay())
 
-  const secondsLeft = differenceInSeconds(nextMinute, now)
-  const minutesLeft = differenceInMinutes(nextHour, now)
-  const hoursLeft = differenceInHours(tomorrow, now)
-  const daysLeft = differenceInDays(nextYear, now)
-  const yearsLeft = differenceInYears(expiryDate, now)
-
-  return { secondsLeft, minutesLeft, hoursLeft, daysLeft, yearsLeft }
+  return `${year}-${month}-${day}`
 }
 
 function IndexPopup() {
-  const [birthdate, setBirthdate] = useStorage("birthdate")
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>()
-
-  useEffect(() => {
-    setInterval(() => {
-      if (birthdate) {
-        setTimeLeft(getDistanceUntilExpiry(birthdate))
-      }
-    }, 1000)
-  }, [birthdate])
+  const { birthdate, setBirthdate, timeLeft } = useDeathClock()
 
   return (
     <div className="w-[36rem]">
@@ -101,7 +60,7 @@ function IndexPopup() {
           id="birthdate"
           className="mt-2 w-full border-2 border-black focus:border-black"
           onChange={({ target }) => setBirthdate(target.value)}
-          value={birthdate || "1900-05-06"}
+          value={birthdate || getDefaultDate()}
         />
       </div>
 
@@ -109,7 +68,6 @@ function IndexPopup() {
         <p>
           The average human life lasts{" "}
           <span className="font-bold">{AVERAGE_LIFE_EXPETANCY} years</span>.
-          Time is our non-renewable resource.
         </p>
 
         <p className="italic mt-2">What will you do with what you have left?</p>

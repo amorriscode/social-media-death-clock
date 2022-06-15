@@ -25,7 +25,7 @@ const injectStyles = () => {
 
 const injectContainer = () => {
   const container = document.createElement("div")
-  container.id = "smdc-banner"
+  container.classList.add("smdc")
   container.style.cssText = "z-index: 99999999999;"
   document.body.insertAdjacentElement("afterbegin", container)
 }
@@ -33,7 +33,7 @@ const injectContainer = () => {
 export const getRootContainer = async () => {
   injectStyles()
   injectContainer()
-  return document.querySelector("#smdc-banner")
+  return document.querySelector(".smdc")
 }
 
 // see: https://github.com/PlasmoHQ/plasmo/issues/20

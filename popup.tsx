@@ -18,7 +18,7 @@ function IndexPopup() {
   const { birthdate, setBirthdate, timeLeft } = useDeathClock()
 
   return (
-    <div className="w-[36rem]">
+    <div className="smdc" style={{ width: "420px" }}>
       <div className="bg-yellow-300 p-12">
         {timeLeft && (
           <div className="font-bold text-4xl uppercase mb-12">

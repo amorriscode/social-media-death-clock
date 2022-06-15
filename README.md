@@ -1,4 +1,8 @@
-# Social Media Death Clock ☠️
+<p align="center">
+  <img alt="social media death clock" width="75%" src="https://user-images.githubusercontent.com/16005567/173934152-c0d0c301-71b1-412f-bd8a-8f0771325bb6.jpg" />
+</p>
+
+# Social Media Death Clock
 
 ## Memento Mori
 
@@ -16,7 +20,7 @@ Download the Chrome Extension from the [Chrome Web Store](https://chrome.google.
 
 Inspired by [twitter-timer](https://github.com/siddharthkp/twitter-timer) and [the death clock Chrome Extension](https://chrome.google.com/webstore/detail/death-clock/nddjbfjdamhcmdcghehomomgppbigjam).
 
-## Contributors
+## Contribute
 
 Am I missing a social media site you'd love to see? Don't be afraid to [create an issue](https://github.com/amorriscode/social-media-death-clock/issues/new) or [open a pull request](https://github.com/amorriscode/social-media-death-clock/compare). All contributions are welcome!
 

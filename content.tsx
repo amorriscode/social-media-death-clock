@@ -36,10 +36,6 @@ export const getRootContainer = async () => {
   return document.querySelector(".smdc")
 }
 
-// see: https://github.com/PlasmoHQ/plasmo/issues/20
-export const getMountPoint = undefined
-export const getStyle = undefined
-
 const DeathClockBanner = () => {
   const [showBanner, setShowBanner] = useState(true)
   const { birthdate, timeLeft } = useDeathClock()

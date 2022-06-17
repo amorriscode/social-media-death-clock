@@ -13,8 +13,7 @@ export const config: PlasmoContentScript = {
     "https://www.reddit.com/*",
     "https://www.linkedin.com/*",
     "https://vk.com/*"
-  ],
-  all_frames: true
+  ]
 }
 
 const injectStyles = () => {
@@ -45,7 +44,7 @@ const DeathClockBanner = () => {
       {showBanner && (
         <>
           <div className="p-6 pr-8 bg-yellow-300 text-black font-bold border-solid border-2 border-black uppercase">
-            {!birthdate && <div>Set your birthdate</div>}
+            {!birthdate && <div className="text-2xl">Set your birthdate</div>}
 
             {timeLeft && (
               <div>

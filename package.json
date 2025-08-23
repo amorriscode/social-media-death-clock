@@ -1,7 +1,7 @@
 {
   "name": "social-media-death-clock",
   "displayName": "Social Media Death Clock",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Remind yourself of your mortality while you waste away on social media",
   "author": "amorriscode",
   "scripts": {
@@ -23,7 +23,7 @@
     "@types/react": "18.0.12",
     "@types/react-dom": "18.0.5",
     "autoprefixer": "^10.4.7",
-    "plasmo": "latest",
+    "plasmo": "^0.90.5",
     "postcss": "^8.4.31",
     "postcss-nested": "^5.0.6",
     "postcss-rem-to-responsive-pixel": "^5.1.3",

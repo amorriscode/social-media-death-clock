@@ -3,7 +3,7 @@
  */
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    "@tailwindcss/postcss": {},
     "postcss-nested": {},
     "postcss-rem-to-responsive-pixel": {
       rootValue: 16,

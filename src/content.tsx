@@ -1,19 +1,20 @@
 import css from "data-text:~styles.css"
-import type { PlasmoContentScript } from "plasmo"
+import type { PlasmoCSConfig } from "plasmo"
 import { useState } from "react"
 
-import { useDeathClock } from "~useDeathClock"
+import { useDeathClock } from "~/useDeathClock"
 
-export const config: PlasmoContentScript = {
+export const config: PlasmoCSConfig = {
   matches: [
-    "https://twitter.com/*",
+    "https://x.com/*",
     "https://www.facebook.com/*",
     "https://www.youtube.com/*",
     "https://www.instagram.com/*",
     "https://www.reddit.com/*",
     "https://www.linkedin.com/*",
     "https://vk.com/*"
-  ]
+  ],
+  all_frames: true
 }
 
 const injectStyles = () => {
@@ -35,7 +36,7 @@ export const getRootContainer = async () => {
   return document.querySelector(".smdc")
 }
 
-const DeathClockBanner = () => {
+export default function DeathClockBanner() {
   const [showBanner, setShowBanner] = useState(true)
   const { birthdate, timeLeft } = useDeathClock()
 
@@ -96,5 +97,3 @@ const DeathClockBanner = () => {
     </div>
   )
 }
-
-export default DeathClockBanner

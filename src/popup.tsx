@@ -1,7 +1,7 @@
-import { useDeathClock } from "~useDeathClock"
-import { AVERAGE_LIFE_EXPETANCY } from "~utils"
+import { useDeathClock } from "~/useDeathClock"
+import { AVERAGE_LIFE_EXPETANCY } from "~/utils"
 
-import "./styles.css"
+import "~/styles.css"
 
 const padCalendarNum = (number) => number.toString().padStart(2, "0")
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 
-import { useStorage } from "@plasmohq/storage"
+import { useStorage } from "@plasmohq/storage/hook"
 
-import { TimeLeft, getDistanceUntilExpiry } from "~utils"
+import { getDistanceUntilExpiry, type TimeLeft } from "~/utils"
 
 export const useDeathClock = () => {
   const [birthdate, setBirthdate] = useStorage("birthdate")

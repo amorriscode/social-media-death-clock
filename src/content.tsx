@@ -1,3 +1,4 @@
+import skull from "data-base64:~/../assets/skull.png"
 import css from "data-text:~styles.css"
 import type { PlasmoCSConfig } from "plasmo"
 import { useState } from "react"
@@ -37,63 +38,77 @@ export const getRootContainer = async () => {
 }
 
 export default function DeathClockBanner() {
-  const [showBanner, setShowBanner] = useState(true)
-  const { birthdate, timeLeft } = useDeathClock()
+  const [showTimer, setShowTimer] = useState(true)
+  const [isHovered, setIsHovered] = useState(false)
+  const { birthdate, timeLeft, setBirthdate } = useDeathClock()
 
   return (
-    <div className="fixed bottom-0 m-4 font-sans flex items-center z-[999999999]">
-      {showBanner && (
-        <>
-          <div className="p-6 pr-8 bg-yellow-300 text-black font-bold border-solid border-2 border-black uppercase">
-            {!birthdate && <div className="text-2xl">Set your birthdate</div>}
+    <div
+      className="fixed bottom-0 left-0 right-0 m-4 font-sans flex justify-center items-center z-[999999999]"
+      style={{ pointerEvents: "none" }}>
+      <div
+        className={`p-2 ${showTimer ? "px-8" : "px-4"} bg-black text-white rounded-full border border-zinc-800 shadow-2xl cursor-default relative hover:cursor-pointer`}
+        style={{ pointerEvents: "auto" }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => timeLeft && setShowTimer((currTimer) => !currTimer)}>
+        {showTimer ? (
+          <>
+            {!birthdate && (
+              <div className="">
+                <div className="text-xs uppercase tracking-wider mb-2">
+                  When were you born?
+                </div>
+                <input
+                  type="date"
+                  className="bg-black text-white text-sm rounded-full focus:outline-none w-full"
+                  onChange={(e) => setBirthdate(e.target.value)}
+                />
+              </div>
+            )}
 
             {timeLeft && (
-              <div>
-                <div className="tracking-widest text-xs mb-2">Time Left</div>
-
-                <div className="flex space-x-6 text-center">
-                  <div>
-                    <div className="text-2xl">{timeLeft.yearsLeft}</div>
-                    <div className="text-xs">years</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl">{timeLeft.daysLeft}</div>
-                    <div className="text-xs">days</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl">{timeLeft.hoursLeft}</div>
-                    <div className="text-xs">hours</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl">{timeLeft.minutesLeft}</div>
-                    <div className="text-xs">minutes</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl">{timeLeft.secondsLeft}</div>
-                    <div className="text-xs">seconds</div>
+              <div className="relative">
+                <div
+                  className={`transition-opacity duration-500 ${isHovered ? "opacity-0" : "opacity-100"}`}>
+                  <div className="flex space-x-2 text-center font-mono">
+                    <div className="text-sm w-8 inline-block tabular-nums">
+                      {timeLeft.yearsLeft}
+                    </div>
+                    <div className="text-sm">:</div>
+                    <div className="text-sm w-8 inline-block tabular-nums">
+                      {timeLeft.daysLeft}
+                    </div>
+                    <div className="text-sm">:</div>
+                    <div className="text-sm w-8 inline-block tabular-nums">
+                      {timeLeft.hoursLeft}
+                    </div>
+                    <div className="text-sm">:</div>
+                    <div className="text-sm w-8 inline-block tabular-nums">
+                      {timeLeft.minutesLeft}
+                    </div>
+                    <div className="text-sm">:</div>
+                    <div className="text-sm w-8 inline-block tabular-nums">
+                      {timeLeft.secondsLeft}
+                    </div>
                   </div>
                 </div>
 
-                <div></div>
+                <div
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${isHovered ? "opacity-100" : "opacity-0"}`}>
+                  <div className="text-xs tracking-wider uppercase">
+                    MAKE IT COUNT
+                  </div>
+                </div>
               </div>
             )}
+          </>
+        ) : (
+          <div className="cursor-pointer">
+            <img src={skull} alt="Some pretty cool image" className="w-4 h-4" />
           </div>
-
-          <div
-            className="font-bold text-yellow-300 bg-black p-2 -ml-4 hover:cursor-pointer"
-            onClick={() => setShowBanner(false)}>
-            &lt;
-          </div>
-        </>
-      )}
-
-      {!showBanner && (
-        <div
-          className="font-bold bg-yellow-300 p-2 border-solid border-2 border-black hover:cursor-pointer"
-          onClick={() => setShowBanner(true)}>
-          &gt;
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

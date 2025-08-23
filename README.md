@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="social media death clock" width="75%" src="https://user-images.githubusercontent.com/16005567/173934152-c0d0c301-71b1-412f-bd8a-8f0771325bb6.jpg" />
+  <img width="128" height="128" alt="Image" src="https://github.com/user-attachments/assets/5941b140-fe3a-4035-8f2d-5ef7eb0516b8" />
 </p>
 
 # Social Media Death Clock

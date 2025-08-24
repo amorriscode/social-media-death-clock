@@ -172,7 +172,7 @@ export default function DeathClockBanner() {
             )}
             onClick={(e) => e.stopPropagation()}>
             <div className="w-[140px] mx-auto flex flex-col items-center text-xs tracking-wider uppercase space-y-4 whitespace-nowrap">
-              <img src={skull} alt="Skull" className="w-4 h-4 mx-auto" />
+              <img src={skull} alt="Skull" className="w-4 h-4 mx-auto m-0" />
 
               <div className="h-px w-[98%] bg-zinc-800" />
 

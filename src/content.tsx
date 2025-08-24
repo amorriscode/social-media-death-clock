@@ -42,12 +42,29 @@ export default function DeathClockBanner() {
   const [showTimer, setShowTimer] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const { birthdate, timeLeft, setBirthdate } = useDeathClock()
+  const [isHoverDisabled, setIsHoverDisabled] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
       setShowTimer(true)
     }, 1000)
-  }, [timeLeft])
+  }, [])
+
+  function getWidth() {
+    if (isHovered && !isHoverDisabled) {
+      return "w-[140px]"
+    }
+
+    if (!showTimer) {
+      return "w-[48px]"
+    }
+
+    if (timeLeft) {
+      return "w-[280px]"
+    }
+
+    return "w-[320px]"
+  }
 
   return (
     <div
@@ -55,14 +72,24 @@ export default function DeathClockBanner() {
       style={{ pointerEvents: "none" }}>
       <div
         className={clsx(
-          "h-[48px] bg-black text-white rounded-full border border-zinc-800 shadow-2xl cursor-default relative hover:cursor-pointer transition-all duration-700 overflow-hidden flex items-center justify-center",
-          !showTimer ? "w-[48px]" : timeLeft ? "w-[280px]" : "w-[320px]"
+          "bg-black text-white border border-white cursor-default relative transition-all duration-700 overflow-hidden flex items-center justify-center shadow-2xl",
+          getWidth(),
+          isHovered && !isHoverDisabled
+            ? "h-[124px] rounded-xl"
+            : "h-[48px] rounded-[24px]"
         )}
         style={{ pointerEvents: "auto" }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => {
+          if (!isHoverDisabled && !(showTimer && !birthdate)) {
+            setIsHovered(true)
+          }
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false)
+          setIsHoverDisabled(false)
+        }}
         onClick={() => timeLeft && setShowTimer((currTimer) => !currTimer)}>
-        {showTimer && (
+        {showTimer && !isHovered && (
           <>
             {!birthdate && (
               <div className="">
@@ -82,7 +109,7 @@ export default function DeathClockBanner() {
                 <div
                   className={clsx(
                     "transition-opacity duration-500",
-                    isHovered ? "opacity-0" : "opacity-100"
+                    isHovered && !isHoverDisabled ? "opacity-0" : "opacity-100"
                   )}>
                   <div className="flex space-x-2 text-center font-mono">
                     <div className="text-sm w-8 inline-block tabular-nums">
@@ -106,27 +133,66 @@ export default function DeathClockBanner() {
                     </div>
                   </div>
                 </div>
-
-                <div
-                  className={clsx(
-                    "absolute inset-0 flex items-center justify-center transition-opacity duration-700",
-                    isHovered ? "opacity-100" : "opacity-0"
-                  )}>
-                  <div className="text-xs tracking-wider uppercase">
-                    MAKE IT COUNT
-                  </div>
-                </div>
               </div>
             )}
           </>
         )}
+
+        <div
+          className={clsx(
+            "absolute inset-0 flex items-center justify-center transition-opacity duration-700",
+            isHovered
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          )}
+          onClick={(e) => e.stopPropagation()}>
+          <div className="w-[140px] mx-auto flex flex-col items-center text-xs tracking-wider uppercase space-y-4 whitespace-nowrap">
+            <div>MAKE IT COUNT</div>
+
+            <div className="h-px w-24 bg-zinc-800" />
+
+            {showTimer ? (
+              <button
+                className="hover:text-zinc-300"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowTimer(false)
+                  setIsHovered(false)
+                  setIsHoverDisabled(true)
+                }}>
+                HIDE TIMER
+              </button>
+            ) : (
+              <button
+                className="hover:text-zinc-300"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowTimer(true)
+                }}>
+                SHOW TIMER
+              </button>
+            )}
+
+            {birthdate && (
+              <button
+                className="hover:text-zinc-300"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setBirthdate(undefined)
+                  setShowTimer(true)
+                }}>
+                RESET BIRTHDATE
+              </button>
+            )}
+          </div>
+        </div>
 
         <img
           src={skull}
           alt="Social Media Death Clock skull logo"
           className={clsx(
             "w-4 h-4 absolute top-0 right-0 bottom-0 left-0 m-auto transition-opacity duration-700",
-            showTimer ? "opacity-0" : "opacity-100"
+            isHovered || showTimer ? "opacity-0" : "opacity-100"
           )}
         />
       </div>

@@ -17,6 +17,8 @@ export const useDeathClock = () => {
       }, 1000)
 
       return () => clearInterval(interval)
+    } else {
+      setTimeLeft(undefined)
     }
   }, [birthdate])
 

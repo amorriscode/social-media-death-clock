@@ -12,7 +12,21 @@ import { DatePicker } from "@mantine/dates"
 
 const theme = createTheme({
   fontFamily: "Inter, sans-serif",
-  fontFamilyMonospace: "JetBrains Mono, monospace"
+  fontFamilyMonospace: "JetBrains Mono, monospace",
+  fontSizes: {
+    xs: "12px",
+    sm: "14px",
+    md: "16px",
+    lg: "18px",
+    xl: "20px"
+  },
+  spacing: {
+    xs: "8px",
+    sm: "12px",
+    md: "16px",
+    lg: "20px",
+    xl: "24px"
+  }
 })
 
 const padCalendarNum = (number) => number.toString().padStart(2, "0")

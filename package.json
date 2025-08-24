@@ -10,9 +10,13 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@mantine/core": "^8.2.7",
+    "@mantine/dates": "^8.2.7",
+    "@mantine/hooks": "^8.2.7",
     "@plasmohq/storage": "^1.15.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "plasmo": "0.90.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",

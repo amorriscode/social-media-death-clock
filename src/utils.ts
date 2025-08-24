@@ -27,7 +27,7 @@ const getExpiryDate = (birthdate) => {
 
 export const getDistanceUntilExpiry = (birthdate): TimeLeft => {
   if (!birthdate) {
-    return
+    return undefined
   }
 
   const now = new Date()

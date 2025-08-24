@@ -36,7 +36,11 @@ function IndexPopup() {
         style={{ width: "420px", padding: "12px", background: "white" }}>
         <div className="p-12 bg-black rounded-xl">
           <section className="text-white text-center mb-12">
-            <img src={skull} alt="Skull" className="w-12 h-12 mx-auto mb-4" />
+            <img
+              src={skull}
+              alt="Skull"
+              className="w-12 h-12 mx-auto mb-4 m-0"
+            />
 
             <p>
               The average human life lasts{" "}

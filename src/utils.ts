@@ -13,6 +13,33 @@ import {
 
 export const AVERAGE_LIFE_EXPETANCY = 72
 
+export const DEFAULT_WEBSITES = [
+  "https://x.com/*",
+  "https://www.facebook.com/*",
+  "https://www.youtube.com/*",
+  "https://www.instagram.com/*",
+  "https://www.reddit.com/*",
+  "https://www.linkedin.com/*",
+  "https://vk.com/*"
+]
+
+export const matchesPattern = (url: string, pattern: string): boolean => {
+  // Convert wildcard pattern to regex
+  const regexPattern = pattern
+    .replace(/[.+?^${}()|[\]\\]/g, "\\$&") // Escape special regex chars
+    .replace(/\*/g, ".*") // Convert * to .*
+
+  const regex = new RegExp(`^${regexPattern}$`)
+  return regex.test(url)
+}
+
+export const shouldShowOnCurrentSite = (
+  currentUrl: string,
+  websites: string[]
+): boolean => {
+  return websites.some((pattern) => matchesPattern(currentUrl, pattern))
+}
+
 export type TimeLeft = {
   secondsLeft: number
   minutesLeft: number

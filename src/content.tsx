@@ -1,5 +1,6 @@
 import { createTheme, MantineProvider } from "@mantine/core"
 import { DatePicker } from "@mantine/dates"
+import { useStorage } from "@plasmohq/storage/hook"
 import clsx from "clsx"
 import skull from "data-base64:~/../assets/skull.png"
 import css from "data-text:~styles.css"
@@ -10,17 +11,10 @@ import "@mantine/core/styles.css"
 import "@mantine/dates/styles.css"
 
 import { useDeathClock } from "~/useDeathClock"
+import { DEFAULT_WEBSITES, shouldShowOnCurrentSite } from "~/utils"
 
 export const config: PlasmoCSConfig = {
-  matches: [
-    "https://x.com/*",
-    "https://www.facebook.com/*",
-    "https://www.youtube.com/*",
-    "https://www.instagram.com/*",
-    "https://www.reddit.com/*",
-    "https://www.linkedin.com/*",
-    "https://vk.com/*"
-  ],
+  matches: ["https://*/*"],
   all_frames: true
 }
 
@@ -67,6 +61,12 @@ export default function DeathClockBanner() {
   const [isHovered, setIsHovered] = useState(false)
   const { birthdate, timeLeft, setBirthdate } = useDeathClock()
   const [isHoverDisabled, setIsHoverDisabled] = useState(false)
+  const [websites] = useStorage<string[]>("websites", DEFAULT_WEBSITES)
+
+  // Check if we should show the death clock on this site
+  if (!shouldShowOnCurrentSite(window.location.href, websites || DEFAULT_WEBSITES)) {
+    return null
+  }
 
   useEffect(() => {
     setTimeout(() => {

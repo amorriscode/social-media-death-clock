@@ -35,7 +35,7 @@ const getDefaultDate = () => {
   const now = new Date()
   const year = now.getFullYear()
   const month = padCalendarNum(now.getMonth())
-  const day = padCalendarNum(now.getDay())
+  const day = padCalendarNum(now.getDate())
 
   return `${year}-${month}-${day}`
 }
